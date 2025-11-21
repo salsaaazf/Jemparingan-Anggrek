@@ -1,12 +1,14 @@
 <script setup>
 import { ref } from 'vue'
-import { useInputStore } from '@/stores/inputStore'
-import { useAuthStore } from '@/stores/authStore' 
-import { Trash2, Edit, Calendar, User, Save, RefreshCw } from 'lucide-vue-next' 
+import { useInputStore } from '@/stores/inputStore.js' 
+import { useAuthStore } from '@/stores/authStore.js' 
+import { useJemparinganStore } from '@/stores/jemparinganStore.js'
+import { Trash2, Edit, Calendar, User, Save, RefreshCw, FileText  } from 'lucide-vue-next' 
 import Swal from 'sweetalert2' 
 
 const store = useInputStore()
 const authStore = useAuthStore()
+const jemparinganStore = useJemparinganStore()
 
 const form = ref({
   round: '',
@@ -40,24 +42,19 @@ const handleSave = () => {
     })
     form.value = { round: '', target: '', date: '' }
   }
-
-  const cancelEdit = () => {
-    isEditing.value = false
-    editingId.value = null
-    form.value = { round: '', target: '', date: '' }
-  } 
-
-  store.addEntry({ ...form.value })
-  
-  Swal.fire({
-    icon: 'success',
-    title: 'Succeed',
-    text: 'Data saved!',
-    timer: 1500,
-    showConfirmButton: false
-  })
-
+  else {
+    store.addEntry({ ...form.value })
+    Swal.fire({
+      icon: 'success',
+      title: 'Succeed',
+      text: 'Data saved!',
+      timer: 1500,
+      showConfirmButton: false
+    })
+  }
   form.value = { round: '', target: '', date: '' }
+  isEditing.value = false
+  editingId.value = null
 }
 
 const handleDelete = (id) => {
@@ -72,8 +69,12 @@ const handleDelete = (id) => {
   }).then((result) => {
     if (result.isConfirmed) {
       store.deleteEntry(id)
-      if (editingId.value === id) cancelEdit()
-      Swal.fire('Deleted!', 'Data has been deleted.', 'success')
+      if (editingId.value === id) {
+        isEditing.value = false
+        editingId.value = null
+        form.value = { round: '', target: '', date: '' }
+      }
+      Swal.fire('Deleted!', 'The data has been deleted.', 'success')
     }
   })
 }
@@ -96,6 +97,7 @@ const handleAction = (item) => {
     } else if (result.isDenied) {
       startEditing(item)
     }
+    /*Data masih nambah ke bawah!!!*/ 
   })
 }
 
@@ -110,10 +112,24 @@ const startEditing = (item) => {
   window.scrollTo({top: 0, behavior: 'smooth'})
 }
 
+const handleDisplay = (item) =>{
+  Swal.fire({
+    title: 'Display Data',
+    icon: 'success',
+    html: `Displaying data for <strong> Round: ${item.round} - Target: ${item.target}</strong>.`,
+    timer: 2000,
+    showConfirmButton: false,
+    willClose: () => {
+      jemparinganStore.setMatchInfo(item.round, item.target);
+      authStore.role = 'recap';
+    }
+  });
+}
+
 const simulateScan = (item) => {
   Swal.fire({
     title: 'Start Scan...',
-    html: 'Sedang memindai data untuk <strong>${item.round} - ${item.target}</strong>.',
+    html: `Sedang memindai data untuk <strong> Round: ${item.round} - Target: ${item.target}</strong>.`,
     timer: 2000,
     didOpen: () => {
       Swal.showLoading()
@@ -126,6 +142,25 @@ const simulateScan = (item) => {
     }
   })
 }
+
+/*
+const cancelEdit = () => {
+isEditing.value = false
+editingId.value = null
+  form.value = { round: '', target: '', date: '' }
+} 
+
+store.addEntry({ ...form.value }) 
+  Swal.fire({
+    icon: 'success',
+    title: 'Succeed',
+    text: 'Data saved!',
+    timer: 1500,
+    showConfirmButton: false
+  })
+
+  form.value = { round: '', target: '', date: '' }
+*/
 </script>
 
 <template>
@@ -190,6 +225,7 @@ const simulateScan = (item) => {
               <td class="actions">
                 <button @click="handleAction(item)" class="btn-icon edit"><Edit size="16" /></button> 
                 <button @click="handleDelete(item.id)" class="btn-icon delete"><Trash2 size="16" /></button>
+                <button @click="handleDisplay(item)" class="btn-icon display"><FileText size="16" /></button>
               </td>
             </tr>
           </tbody>
@@ -396,4 +432,11 @@ tr:first-child td {
   border: 1px solid #E74C3C; 
   border-radius: 4px; 
 }
+
+.display { 
+  color: #27AE60; 
+  border: 1px solid #27AE60; 
+  border-radius: 4px; 
+}
+
 </style>
