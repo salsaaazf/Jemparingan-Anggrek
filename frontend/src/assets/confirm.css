@@ -1,177 +1,296 @@
-/* ===== GLOBAL PAGE WRAPPER ===== */
-.confirm-page {
+/* =========================================================
+   GLOBAL LAYOUT
+   ========================================================= */
+
+.app-screen,
+.scan-screen {
   min-height: 100vh;
   background-color: #f5f5f5;
   display: flex;
   flex-direction: column;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-/* Biar tampak seperti layar HP di tengah (opsional, tapi mirip mockup) */
-.confirm-container {
-  width: 100%;
-  max-width: 390px; /* lebar iPhone mockup */
-  margin: 0 auto;
-  padding: 16px 16px 32px;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
-}
-
-/* ===== APP HEADER (HIJAU ATAS) ===== */
-.app-header {
-  width: 100%;
+/* Konten dibatasi 390px (frame mobile) */
+.content,
+.scan-content {
   max-width: 390px;
   margin: 0 auto;
+  width: 100%;
+}
+
+/* =========================================================
+   TOP BAR — ADMIN HEADER
+   ========================================================= */
+
+.topbar,
+.scan-topbar {
+  width: 100%;
   background-color: #25564a;
   color: #ffffff;
-  padding: 10px 16px;
+  padding: 12px 18px;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  max-width: 390px;
+  margin: 0 auto;
 }
 
-.app-header-left {
+.topbar-left {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
-.app-header-icon {
-  width: 24px;
-  height: 24px;
-  border-radius: 999px;
-  background-color: rgba(255, 255, 255, 0.15);
+.avatar-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 18px;
 }
 
-.app-header-title {
-  font-size: 14px;
-  font-weight: 500;
+.topbar-title,
+.scan-topbar-title {
+  font-size: 15px;
+  font-weight: 600;
 }
 
-.app-header-menu {
-  width: 26px;
+.topbar-menu {
+  width: 28px;
   height: 20px;
-  background: transparent;
-  border: none;
-  padding: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.topbar-menu span {
+  width: 100%;
+  height: 3px;
+  background-color: #ffffff;
+  border-radius: 999px;
+}
+
+.scan-back {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 20px;
   cursor: pointer;
 }
 
-.app-header-menu span {
-  display: block;
-  height: 2px;
-  border-radius: 999px;
-  background-color: #ffffff;
+/* =========================================================
+   RED TARGET PAGE CONTENT
+   ========================================================= */
+
+.content {
+  padding: 20px 18px 60px;
 }
 
-/* ===== PAGE TITLE ===== */
-.page-title {
-  margin: 20px 0 12px;
-  font-size: 20px;
-  font-weight: 600;
+/* Judul digeser sedikit ke kanan */
+.screen-title {
+  font-size: 22px;
+  font-weight: 700;
   color: #1f2c26;
+  margin-bottom: 16px;
+  margin-left: 10px;
 }
 
-/* ===== TABLE CARD ===== */
+/* TABLE CARD — diperkecil biar tidak mepet */
 .table-card {
+  width: 95%;
+  margin: 0 auto 20px auto;
   background-color: #ffffff;
-  border-radius: 6px;
+  border-radius: 12px;
   overflow: hidden;
   border: 1px solid #dcdcdc;
 }
 
-/* Table */
+/* TABLE */
 .score-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 13px;
 }
 
-.score-table thead {
+.score-table thead tr {
   background-color: #25564a;
   color: #ffffff;
+  font-weight: 600;
 }
 
+/* Row dibuat lebih ramping */
 .score-table th,
 .score-table td {
-  padding: 8px 12px;
-  text-align: left;
-  border-bottom: 1px solid #e3e3e3;
+  padding: 6px 10px;
+  border-bottom: 1px solid #e5e5e5;
 }
 
-.score-table th:last-child,
-.score-table td:last-child {
-  border-right: none;
+.score-table tbody tr:last-child td {
+  border-bottom: none;
 }
 
-.score-table th:first-child,
-.score-table td:first-child {
-  border-left: none;
-}
-
-/* Kolom spesifik */
+/* TABLE COLUMNS */
 .col-rank {
-  width: 70px;
+  width: 60px;
 }
-.col-name {
-  width: auto;
-}
+
 .col-arrow {
   width: 70px;
   text-align: center;
 }
 
-/* Baris terakhir tanpa border bawah tebal */
-.score-table tbody tr:last-child td {
-  border-bottom: none;
-}
+/* =========================================================
+   BUTTONS (RESCAN & CONFIRM)
+   ========================================================= */
 
-/* ===== RESCAN BUTTON (KOTAK KECIL) ===== */
-.rescan-btn {
-  margin-top: 16px;
+.btn-rescan {
   padding: 8px 16px;
-  border-radius: 6px;
-  border: none;
   background-color: #25564a;
   color: #ffffff;
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 14px;
+  border-radius: 6px;
+  border: none;
   display: inline-flex;
   align-items: center;
   gap: 6px;
   cursor: pointer;
+  margin-left: 10px;
 }
 
 .rescan-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
 }
 
-/* ===== CONFIRM BUTTON BESAR ===== */
-.confirm-btn {
-  margin: 40px auto 0;
-  display: block;
-  width: 80%;
-  max-width: 320px;
-  padding: 14px 0;
-  border: none;
-  border-radius: 999px;
+.btn-confirm {
+  width: 85%;
+  max-width: 340px;
   background-color: #25564a;
   color: #ffffff;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 600;
+  padding: 14px 0;
+  border-radius: 999px;
+  border: none;
+  display: block;
+  margin: 40px auto 0 auto;
   cursor: pointer;
-  text-align: center;
 }
 
-.confirm-btn:hover {
-  filter: brightness(0.96);
+/* =========================================================
+   CAMERA SCAN LAYOUT
+   ========================================================= */
+
+.scan-red-area {
+  width: 100%;
+  max-width: 390px;
+  margin: 0 auto;
+  aspect-ratio: 3 / 4;
+  background-color: #ff0000;
+  position: relative;
+  overflow: hidden;
+}
+
+.scan-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Kotak putih untuk framing */
+.scan-square {
+  position: absolute;
+  inset: 18%;
+  border-radius: 12px;
+  border: 4px solid #ffffff;
+}
+
+/* BOTTOM SECTION */
+.scan-bottom {
+  width: 100%;
+  max-width: 390px;
+  text-align: center;
+  margin: 0 auto;
+  padding: 20px 18px;
+}
+
+.scan-instruction {
+  font-size: 14px;
+  margin-bottom: 12px;
+  color: #333;
+}
+
+/* =========================================================
+   ZOOM SLIDER (FINAL, PRESISI FRAME)
+   ========================================================= */
+
+.scan-slider {
+  width: 80%;                /* lebih pendek, pasti aman di dalam frame */
+  margin: 0 auto 20px auto;  /* center */
+  display: block;
+  height: 4px;
+  border-radius: 4px;
+  background: #d6d6d6;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+/* Track (garis slider) */
+.scan-slider::-webkit-slider-runnable-track {
+  height: 4px;
+  background: #25564a;      /* hijau tema */
+  border-radius: 4px;
+}
+
+/* Thumb bulat (Chrome/Safari/Edge) */
+.scan-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 18px;
+  width: 18px;
+  margin-top: -7px;
+  background: #25564a;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Thumb bulat (Firefox) */
+.scan-slider::-moz-range-thumb {
+  height: 18px;
+  width: 18px;
+  background: #25564a;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* =========================================================
+   NEXT BUTTON & STATUS TEXT
+   ========================================================= */
+
+.scan-next-btn {
+  background-color: #25564a;
+  color: white;
+  padding: 10px 30px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+
+  /* tetap di kanan, tapi ada jarak dari pinggir frame */
+  display: block;
+  margin: 0 16px 0 auto;   /* top right bottom left */
+}
+
+.scan-status {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #25564a;
 }

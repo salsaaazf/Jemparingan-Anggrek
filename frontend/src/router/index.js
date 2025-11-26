@@ -1,21 +1,24 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import ConfirmRedTarget from '../pages/Admin/ConfirmRedTarget.vue'
-import ConfirmWhiteTarget from '../pages/Admin/ConfirmWhiteTarget.vue'
+
+// ADMIN
+import ScanRedTarget from '@/pages/Admin/ScanRedTarget.vue'
+import ConfirmRedTarget from '@/pages/Admin/ConfirmRedTarget.vue'
+import ScanWhiteTarget from '@/pages/Admin/ScanWhiteTarget.vue'
+import ConfirmWhiteTarget from '@/pages/Admin/ConfirmWhiteTarget.vue'
 
 const routes = [
-  {
-    path: '/admin/confirm/red',
-    name: 'RedConfirm',
-    component: ConfirmRedTarget,
-  },
-  {
-    path: '/admin/confirm/white',
-    name: 'WhiteConfirm',
-    component: ConfirmWhiteTarget,
-  },
+  // Red Target
+  { path: '/admin/scan/red', name: 'ScanRedTarget', component: ScanRedTarget },
+  { path: '/admin/confirm/red', name: 'ConfirmRedTarget', component: ConfirmRedTarget },
+
+  // White Target
+  { path: '/admin/scan/white', name: 'ScanWhiteTarget', component: ScanWhiteTarget },
+  { path: '/admin/confirm/white', name: 'ConfirmWhiteTarget', component: ConfirmWhiteTarget },
 ]
 
-export const router = createRouter({
+const router = createRouter({
   history: createWebHistory(),
   routes,
 })
+
+export default router
