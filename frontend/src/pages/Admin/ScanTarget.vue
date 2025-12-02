@@ -40,6 +40,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useArrowsStore } from '@/stores/arrows';
 import { BrowserMultiFormatReader } from '@zxing/browser'
+import { storeToRefs } from 'pinia';
 
 const router = useRouter()
 const store = useArrowsStore();
@@ -95,6 +96,9 @@ const stopCamera = () => {
 }
 
 const goBack = () => {
+  if (store.target === 'white') {
+    store.switchTarget()
+  }
   router.back()
 }
 
