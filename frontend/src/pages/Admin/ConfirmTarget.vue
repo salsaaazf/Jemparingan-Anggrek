@@ -30,7 +30,6 @@
     }).then((result) => {
       if (result.isConfirmed) {
         // store.confirm()
-        console.log('Confirmed', store.target)
         Swal.fire({
             icon: 'success',
             title: 'Confirmed!',
