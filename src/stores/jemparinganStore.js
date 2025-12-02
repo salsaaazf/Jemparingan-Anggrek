@@ -4,7 +4,7 @@ import { KeyRound, Target } from 'lucide-vue-next';
 
 export const useJemparinganStore = defineStore('jemparingan', {
   state: () => ({
-    redHits: [  { nomorPemanah: 1, nama: 'Pemanah 1' }, //ini semua cuma dummy biar akuu bisa lihat hasilnya keluar ga ditable
+    redHits: [ /* { nomorPemanah: 1, nama: 'Pemanah 1' }, //ini semua cuma dummy biar akuu bisa lihat hasilnya keluar ga ditable
   { nomorPemanah: 2, nama: 'Pemanah 2' },
   { nomorPemanah: 3, nama: 'Pemanah 3' },
   { nomorPemanah: 4, nama: 'Pemanah 4' },
@@ -21,8 +21,8 @@ export const useJemparinganStore = defineStore('jemparingan', {
   { nomorPemanah: 15, nama: 'Pemanah 15' },
   { nomorPemanah: 16, nama: 'Pemanah 16' },
   { nomorPemanah: 17, nama: 'Pemanah 17' },
-  { nomorPemanah: 18, nama: 'Pemanah 18' },], 
-    whiteHits: [  { nomorPemanah: 1, nama: 'Pemanah 1' }, //ini semua cuma dummy biar akuu bisa lihat hasilnya keluar ga ditable
+  { nomorPemanah: 18, nama: 'Pemanah 18' },*/], 
+    whiteHits: [ /* { nomorPemanah: 1, nama: 'Pemanah 1' }, //ini semua cuma dummy biar akuu bisa lihat hasilnya keluar ga ditable
   { nomorPemanah: 2, nama: 'Pemanah 2' },
   { nomorPemanah: 3, nama: 'Pemanah 3' },
   { nomorPemanah: 4, nama: 'Pemanah 4' },
@@ -41,7 +41,9 @@ export const useJemparinganStore = defineStore('jemparingan', {
   { nomorPemanah: 19, nama: 'Pemanah 19' },
   { nomorPemanah: 20, nama: 'Pemanah 20' },
   { nomorPemanah: 21, nama: 'Pemanah 21' },
-  { nomorPemanah: 22, nama: 'Pemanah 22' },], //dummy selesai
+  { nomorPemanah: 22, nama: 'Pemanah 22' },*/ ], //dummy selesai
+
+    tableEntries: [],
 
     matchInfo: {
       round: '_',
@@ -112,6 +114,9 @@ export const useJemparinganStore = defineStore('jemparingan', {
     setMatchInfo(round, target) {
       this.matchInfo.round = round;
       this.matchInfo.target = target;
+    },
+    addTableEntry(entry) {
+        this.tableEntries.push(entry);
     }
   }
 });

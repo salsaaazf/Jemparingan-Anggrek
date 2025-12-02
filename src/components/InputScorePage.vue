@@ -14,6 +14,7 @@ const formData = reactive({
   status: '' // 'Merah' atau 'Putih'
 })
 
+/*
 // State untuk List Local (Untuk tampilan tabel sesuai gambar)
 // Kita gunakan dummy data awal agar mirip mockup, lalu data baru akan di-push ke sini
 const entryList = ref([
@@ -22,6 +23,9 @@ const entryList = ref([
   { idPemanah: '5382', idPanah: 'P-03', status: 'Putih' },
   { idPemanah: '5382', idPanah: 'P-04', status: 'Merah' },
 ])
+*/
+
+const entryList = jemparinganStore.tableEntries
 
 const goBack = () => {
   authStore.role = 'committee'
@@ -57,7 +61,7 @@ const handleSave = () => {
 
   // 3. Masukkan ke List Tampilan Lokal (Untuk Tabel di bawah form)
   // Masukkan ke paling atas (unshift) atau bawah (push). Di gambar urutannya P-01 s/d P-06, kita pakai push.
-  entryList.value.push({
+  jemparinganStore.addTableEntry({
     idPemanah: formData.idPemanah,
     idPanah: formData.idPanah,
     status: formData.status
@@ -179,16 +183,6 @@ const handleSave = () => {
                     <span class="arrow-down">▼</span>
                   </span>
                 </td>
-              </tr>
-              <tr>
-                <td>5382</td>
-                <td>P-05</td>
-                <td><span class="badge bg-yellow">Cadangan ▼</span></td>
-              </tr>
-               <tr>
-                <td>5382</td>
-                <td>P-06</td>
-                <td><span class="badge bg-yellow">Cadangan ▼</span></td>
               </tr>
             </tbody>
           </table>
