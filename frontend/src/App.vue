@@ -13,5 +13,6 @@
   display: flex;
   justify-content: center;
   background: #f5f5f5;
+  font-family: 'Poppins', sans-serif;
 }
 </style>

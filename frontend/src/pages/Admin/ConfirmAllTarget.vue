@@ -1,12 +1,15 @@
 <script setup>
     import { onMounted } from 'vue';
-    import { useArrowsStore } from './stores/arrows';
+    import { useArrowsStore } from '@/stores/arrows';
+    import { useRouter } from 'vue-router'
     import Swal from 'sweetalert2' 
 
   
-  const store = useArrowsStore();
-  
-  onMounted(() => { store.init('white')})
+    const router = useRouter()
+    const store = useArrowsStore();
+    
+    onMounted(() => { store.init('red')})
+    const goToScan = () => router.push('/admin/scan/' + store.target);
 
   const handleConfirm= () => {
     Swal.fire({
@@ -20,11 +23,21 @@
     }).then((result) => {
       if (result.isConfirmed) {
         // store.confirm()
-        Swal.fire(
-          'Confirmed!',
-          `Your ${store.target} target has been confirmed.`,
-          'success'
-        )
+        Swal.fire({
+            icon: 'success',
+            title: 'Confirmed!',
+            text: `Your ${store.target} target has been confirmed.`,
+            timer: 2000,
+            showConfirmButton: false
+        }).then(() => {
+            if (store.target === 'red') {
+                store.target = 'white';
+                router.push('/admin/scan/white');
+            } else if (store.target === 'white') {
+                store.target = 'red';
+                router.push('/admin/dashboard');
+            }
+        })
       }
     })
   }
@@ -32,63 +45,75 @@
 </script>
 
 <template>
-    <div class="page-title"> {{ store.target.toUpperCase() }} Target Confirmation</div>
+    <div class="screen">
 
-    <header class="app-header">
-        <div class="user-info">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-            </svg>
-            <span>Admin</span>
-        </div>
-    </header>
-
-    <main class="main-content">
-        <h2>{{store.target.toUpperCase()}} Target</h2>
-
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Action</th>
-                    </tr>
-                </thead>
-            </table>
-            <ul class="list">
-                <li v-for="arrow in store.arrows[store.target]" :key="arrow.id" class="items">
-                <td>{{ arrow.id }}</td>
-                <td>{{ arrow.player }}</td>
-                <td>
-                    <button @click="store.remove(arrow.id)">delete</button>
-                </td>
-                </li>
-            </ul>
-        </div>
-
-        <div style="padding: 2px 0;">
-            <h4>Total arrows: {{ store.count }}</h4>
-        </div>
-        <button class="rescan-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="23 4 23 10 17 10"></polyline>
-                <path d="M20.49 15.01a9 9 0 1 1-2.12-9.36L23 10"></path>
-            </svg>
-            <span>Rescan</span>
-        </button>
-    </main>
-
-    <footer class="app-footer" >
-        <button class="confirm-button" @click="handleConfirm()">Confirm</button>
-    </footer>
-</template>
+        <div class="page-title"> {{ store.target.toUpperCase() }} Target Confirmation</div>
+        
+        <header class="app-header">
+            <div class="user-info">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span>Admin</span>
+            </div>
+        </header>
+        
+        <main class="main-content">
+            <h2>{{store.target.toUpperCase()}} Target</h2>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                </table>
+                <ul class="list">
+                    <li v-for="arrow in store.arrows[store.target]" :key="arrow.id" class="items">
+                        <td>{{ arrow.id }}</td>
+                        <td>{{ arrow.player }}</td>
+                        <td>
+                            <button @click="store.remove(arrow.id)">delete</button>
+                        </td>
+                    </li>
+                </ul>
+            </div>
+            
+            <div style="padding: 2px 0;">
+                <h4>Total arrows: {{ store.count }}</h4>
+            </div>
+            <button class="rescan-button" @click="goToScan">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="23 4 23 10 17 10"></polyline>
+                    <path d="M20.49 15.01a9 9 0 1 1-2.12-9.36L23 10"></path>
+                </svg>
+                <span>Rescan</span>
+            </button>
+        </main>
+        
+        <footer class="app-footer" >
+            <button class="confirm-button" @click="handleConfirm()">Confirm</button>
+        </footer>
+    </div>
+    </template>
 
 <style scoped>* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+.screen {
+    width: 390px;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  font-family: system-ui, sans-serif;
 }
 
 body {
@@ -251,10 +276,10 @@ tbody td:first-child {
 }
 
 .app-footer {
-    position: fixed;
+    /* position: fixed; */
     bottom: 0;
     left: 50%;
-    transform: translateX(-50%);
+    /* transform: translateX(-50%); */
     width: 100%;
     background: #ffffff;
     padding: 20px;

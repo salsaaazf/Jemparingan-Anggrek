@@ -6,7 +6,7 @@
         <button class="back-btn" type="button" @click="goBack">
           ←
         </button>
-        <span class="topbar-title">white Target Scan</span>
+        <span class="topbar-title">White Target Scan</span>
         <span class="topbar-spacer"></span>
       </div>
     </header>
@@ -97,7 +97,7 @@ const goBack = () => {
 }
 
 const goNext = () => {
-  router.push('/admin/confirm/red')
+  router.push('/admin/confirm')
 }
 
 onMounted(() => {

@@ -2,7 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 // ADMIN
 import ScanRedTarget from '@/pages/Admin/ScanRedTarget.vue'
-import ConfirmRedTarget from '@/pages/Admin/ConfirmRedTarget.vue'
+import ConfirmAllTarget from '@/pages/Admin/ConfirmAllTarget.vue';
+// import ConfirmRedTarget from '@/pages/Admin/ConfirmRedTarget.vue'
 import ScanWhiteTarget from '@/pages/Admin/ScanWhiteTarget.vue'
 import ConfirmWhiteTarget from '@/pages/Admin/ConfirmWhiteTarget.vue'
 
@@ -11,7 +12,7 @@ const routes = [
   { path: '/', redirect: '/admin/scan/red' },
   // Red Target
   { path: '/admin/scan/red', name: 'ScanRedTarget', component: ScanRedTarget },
-  { path: '/admin/confirm/red', name: 'ConfirmRedTarget', component: ConfirmRedTarget },
+  { path: '/admin/confirm', name: 'ConfirmAllTarget', component: ConfirmAllTarget },
 
   // White Target
   { path: '/admin/scan/white', name: 'ScanWhiteTarget', component: ScanWhiteTarget },

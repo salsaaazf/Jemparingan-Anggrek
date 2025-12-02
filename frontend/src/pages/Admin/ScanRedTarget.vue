@@ -97,7 +97,7 @@ const goBack = () => {
 }
 
 const goNext = () => {
-  router.push('/admin/confirm/red')
+  router.push('/admin/confirm')
 }
 
 onMounted(() => {
