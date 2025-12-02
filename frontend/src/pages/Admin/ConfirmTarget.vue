@@ -7,9 +7,16 @@
   
     const router = useRouter()
     const store = useArrowsStore();
+    const goToScan = () => {
+        store.target === 'red'?
+            // Go to white target scan
+            router.push('/admin/scan'):
+            
+            // Go to dashboard if all confirmed
+            router.push('/admin/dashboard')  
+    };
     
-    onMounted(() => { store.init('red')})
-    const goToScan = () => router.push('/admin/scan/' + store.target);
+    onMounted(() => { store.init()})
 
   const handleConfirm= () => {
     Swal.fire({
@@ -23,21 +30,16 @@
     }).then((result) => {
       if (result.isConfirmed) {
         // store.confirm()
+        console.log('Confirmed', store.target)
         Swal.fire({
             icon: 'success',
             title: 'Confirmed!',
             text: `Your ${store.target} target has been confirmed.`,
             timer: 2000,
             showConfirmButton: false
-        }).then(() => {
-            if (store.target === 'red') {
-                store.target = 'white';
-                router.push('/admin/scan/white');
-            } else if (store.target === 'white') {
-                store.target = 'red';
-                router.push('/admin/dashboard');
-            }
-        })
+        }),
+            goToScan()
+            store.switchTarget()
       }
     })
   }

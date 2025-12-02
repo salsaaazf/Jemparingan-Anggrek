@@ -15,7 +15,7 @@ function saveToStorage(arrows) {
 
 export const useArrowsStore = defineStore('arrows', {
 state: () => ({
-    section: 'red',
+    currentTarget: 'red',
     arrows: {
         'red':[
         { id:'1', player:'ABCD'},
@@ -40,12 +40,11 @@ state: () => ({
     ]},
 }),
 getters: {
-    count: (state) => state.arrows[state.section].length,
-    target: (state) => state.section.trim()
+    count: (state) => state.arrows[state.currentTarget].length,
+    target: (state) => state.currentTarget.trim()
 },
 actions: {
-    init(target) {
-        this.section = target.trim().toLowerCase()
+    init() {
         if (this.arrows.length === 0) {
             this.arrows = loadFromStorage();
         }
@@ -62,10 +61,18 @@ actions: {
     },
 
     remove(id) {
-        const idx = this.arrows[this.section].findIndex((e) => e.id === id);
+        const idx = this.arrows[this.currentTarget].findIndex((e) => e.id === id);
         if (idx !== -1) {
-            this.arrows[this.section].splice(idx, 1);
+            this.arrows[this.currentTarget].splice(idx, 1);
             saveToStorage(this.arrows);          
+        }
+    },
+
+    switchTarget() {
+        if (this.currentTarget === 'red') {
+            this.currentTarget = 'white'
+        } else {
+            this.currentTarget = 'red'
         }
     }
 },

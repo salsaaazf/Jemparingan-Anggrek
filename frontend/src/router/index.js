@@ -1,22 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 // ADMIN
-import ScanRedTarget from '@/pages/Admin/ScanRedTarget.vue'
-import ConfirmAllTarget from '@/pages/Admin/ConfirmAllTarget.vue';
-// import ConfirmRedTarget from '@/pages/Admin/ConfirmRedTarget.vue'
-import ScanWhiteTarget from '@/pages/Admin/ScanWhiteTarget.vue'
-import ConfirmWhiteTarget from '@/pages/Admin/ConfirmWhiteTarget.vue'
+import ConfirmTarget from '@/pages/Admin/ConfirmTarget.vue';
+import ScanTarget from '@/pages/Admin/ScanTarget.vue'
 
 const routes = [
   // Default root -> redirect to admin scan (adjust as needed)
-  { path: '/', redirect: '/admin/scan/red' },
-  // Red Target
-  { path: '/admin/scan/red', name: 'ScanRedTarget', component: ScanRedTarget },
-  { path: '/admin/confirm', name: 'ConfirmAllTarget', component: ConfirmAllTarget },
+  { path: '/', redirect: '/admin/scan' },
+  // Scan page
+  { path: '/admin/scan', name: 'ScanTarget', component: ScanTarget },
 
-  // White Target
-  { path: '/admin/scan/white', name: 'ScanWhiteTarget', component: ScanWhiteTarget },
-  { path: '/admin/confirm/white', name: 'ConfirmWhiteTarget', component: ConfirmWhiteTarget },
+  // Confirm page
+  { path: '/admin/confirm', name: 'ConfirmTarget', component: ConfirmTarget },
+
   // Catch-all unknown paths -> redirect to root
   { path: '/:pathMatch(.*)*', redirect: '/' },
 ]

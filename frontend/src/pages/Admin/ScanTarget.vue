@@ -6,7 +6,7 @@
         <button class="back-btn" type="button" @click="goBack">
           ←
         </button>
-        <span class="topbar-title">White Target Scan</span>
+        <span class="topbar-title">{{store.target.toUpperCase()}} Target Scan</span>
         <span class="topbar-spacer"></span>
       </div>
     </header>
@@ -38,9 +38,11 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { useArrowsStore } from '@/stores/arrows';
 import { BrowserMultiFormatReader } from '@zxing/browser'
 
 const router = useRouter()
+const store = useArrowsStore();
 
 const videoRef = ref(null)
 const lastResult = ref('')
