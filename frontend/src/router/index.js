@@ -7,6 +7,8 @@ import ScanWhiteTarget from '@/pages/Admin/ScanWhiteTarget.vue'
 import ConfirmWhiteTarget from '@/pages/Admin/ConfirmWhiteTarget.vue'
 
 const routes = [
+  // Default root -> redirect to admin scan (adjust as needed)
+  { path: '/', redirect: '/admin/scan/red' },
   // Red Target
   { path: '/admin/scan/red', name: 'ScanRedTarget', component: ScanRedTarget },
   { path: '/admin/confirm/red', name: 'ConfirmRedTarget', component: ConfirmRedTarget },
@@ -14,6 +16,8 @@ const routes = [
   // White Target
   { path: '/admin/scan/white', name: 'ScanWhiteTarget', component: ScanWhiteTarget },
   { path: '/admin/confirm/white', name: 'ConfirmWhiteTarget', component: ConfirmWhiteTarget },
+  // Catch-all unknown paths -> redirect to root
+  { path: '/:pathMatch(.*)*', redirect: '/' },
 ]
 
 const router = createRouter({
