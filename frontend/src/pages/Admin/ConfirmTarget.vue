@@ -110,11 +110,10 @@
 
 .screen {
     width: 390px;
-  min-height: 100vh;
-  background-color: #f5f5f5;
-  display: flex;
-  flex-direction: column;
-  font-family: system-ui, sans-serif;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
 }
 
 body {
@@ -257,6 +256,7 @@ tbody td:first-child {
     border: none;
     border-radius: 8px;
     padding: 10px 16px;
+    font-family: 'Poppins', sans-serif;
     font-size: 0.95rem;
     font-weight: 500;
     cursor: pointer;

@@ -86,7 +86,7 @@ const confirmScores = () => {
   background-color: #f5f5f5;
   display: flex;
   flex-direction: column;
-  font-family: system-ui, sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 /* ===== TOPBAR ===== */

@@ -119,7 +119,6 @@ onUnmounted(() => {
 .screen {
   min-height: 100vh;
   background: #f5f5f5;
-  font-family: system-ui, sans-serif;
   display: flex;
   flex-direction: column;
 }
@@ -210,6 +209,7 @@ onUnmounted(() => {
   border: none;
   padding: 12px 26px;
   border-radius: 18px;
+  font-family: 'Poppins', sans-serif;
   font-size: 15px;
   font-weight: 600;
 }

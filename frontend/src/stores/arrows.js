@@ -15,6 +15,7 @@ function saveToStorage(arrows) {
 
 export const useArrowsStore = defineStore('arrows', {
 state: () => ({
+    currentRound: null,
     currentTarget: 'red',
     arrows: {
         'red':[
@@ -74,6 +75,10 @@ actions: {
         } else {
             this.currentTarget = 'red'
         }
+    },
+
+    setRound(round){
+        this.currentRound = round
     }
 },
 });
